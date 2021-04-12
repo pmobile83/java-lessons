@@ -1,17 +1,19 @@
 package com.github.baklashovanton.atm;
 
-import com.github.baklashovanton.atm.atm.Function;
 import com.github.baklashovanton.atm.client.Client;
 import com.github.baklashovanton.atm.server.Account;
-import com.github.baklashovanton.atm.server.Currency;
+import com.github.baklashovanton.atm.server.Balance;
 import com.github.baklashovanton.atm.server.ProcessingSystem;
 
 public class Console {
     public static void main(String[] args) {
 
-        System.out.println("Баланс составляет: " + Function.getBalance() + " " + Currency.USD);
-
         ProcessingSystem processing = new ProcessingSystem();
+
+        Client client1 = new Client();
+        Client client2 = new Client();
+        processing.addClient(client1);
+        processing.addClient(client2);
 
         Account account1 = new Account();
         account1.addCard("1111 2222 3333 4444");
@@ -22,10 +24,12 @@ public class Console {
         account2.addCard("2222 2222 3333 4444");
         account2.addCard("3333 3333 4444 5555");
 
-        Client client = new Client();
-        client.addAccount(account1);
-        client.addAccount(account2);
+        client1.addAccount(account1);
+        client2.addAccount(account2);
 
-        processing.addClient(client);
+        account1.setBalance(Balance.getBalCur());
+        account1.setNumber("40817111111");
+        System.out.println("Баланс карт " + account1.getCardNums() + " для счета " + account1.getNumber() + " составляет: " + account1.getBalance());
+
     }
 }

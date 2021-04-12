@@ -1,12 +1,14 @@
 package com.github.baklashovanton.atm.server;
 
-import java.math.BigDecimal;
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Account {
     private String number;
-    private BigDecimal balance;
+    private String balance;
     private Currency currency;
     private List<String> cardNums = new ArrayList<>();
 
